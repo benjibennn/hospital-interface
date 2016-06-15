@@ -26,36 +26,54 @@ end
 
 private
 
-class Username < Employee
-	def initialize 
-	@username = doctor
+class Doctor < Employee
+	attr_accessor :password
+	attr_accessor :username
+	def initialize(username, password)
+		@username = username
+		@password = password
 	end
-end
 
-	def username_is_doctor?
-	return true if 
-	!!(@username.length > 4)
+	def username_match?
+		return true if 
+		!!(@username.length > 4)
 	end
 
 
 	def password_match?
-	return true if
-	!!(@password == @username) 	
+		return true if
+		!!(@password == @username) 	
 	end
+end
+
+doctor_object = Doctor.new("ruby_Tuesday", "n")
+
 
 puts "Welcome to Misty River Hospital. Pls enter your username."
-answer = username_is_doctor?
-	
-puts "ruby_Tuesday, pls enter your password."	
-answer = password_match?
+input_username = gets.chomp
 
-puts "welcome ruby_Tuesday. Your access level is: DOCTOR."	
-	"What would you like to do? Select one:"
-	"{a => list_patients, 
-	b => view_records(patient_id), 
-	c => add_records(patient_id), 
-	d => remove_record(patient_id,record_id)
-	}"
+puts "ruby_Tuesday, pls enter your password."
+input_password = gets.chomp
+
+if input_username == doctor_object.username
+	if input_password == doctor_object.password
+		puts "log in success"
+	else
+		puts "there is an error."
+	end  
+else
+	puts "there is an error."
+end	
+# answer = doctor.username_is_doctor?
+
+# answer = password_match?
+
+
+puts "welcome ruby_Tuesday. Your access level is: DOCTOR. What would you like to do? Select one:"
+puts "a => list_patients" 
+puts "b => view_records(patient_id)" 
+puts "c => add_records(patient_id)" 
+puts "d => remove_record(patient_id,record_id)"
 
 
 
